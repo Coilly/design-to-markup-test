@@ -1,5 +1,29 @@
-@use './abstract/mixins.scss';
+@use './abstract/fonts.scss';
+@use './abstract/reset.scss';
+@use './abstract/swiper-override.scss';
 
 * {
   font-family: 'PretendardVariable', 'Circular', sans-serif;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: 1000;
+  border-radius: 0 0 4px 0;
+  font-size: 14px;
+
+  &:focus {
+    top: 0;
+  }
+}
+
+*:focus-visible {
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
 }

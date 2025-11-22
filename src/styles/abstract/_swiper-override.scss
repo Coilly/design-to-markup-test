@@ -1,4 +1,4 @@
-@use './colors' as colors;
+@use './colors.scss' as colors;
 
 .swiper-horizontal > .swiper-pagination-clickable .swiper-pagination-bullet {
   width: 7.5px;
@@ -12,5 +12,5 @@
 }
 
 .swiper-wrapper {
-    padding-bottom:80px;
-  }
+  padding-bottom: 80px;
+}

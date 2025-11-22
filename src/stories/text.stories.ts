@@ -2,7 +2,7 @@ import Text from '@/components/Text/Text';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 
 const meta = {
-  title: 'Example/Text',
+  title: 'Components/Text',
   component: Text,
   parameters: {
     layout: 'fullscreen',

@@ -9,7 +9,7 @@
     @include typography.text-variant(15px, 1.1, 700, -0.04em, 22px);
   }
   &-heading3 {
-    @include typography.text-variant(18px, 1.4, 400, -0.05em, 22px);
+    @include typography.text-variant(14px, 1.4, 400, -0.05em, 22px);
   }
 
   &-paragraph {

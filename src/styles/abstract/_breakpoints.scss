@@ -1,8 +1,9 @@
-$pc-breakpoint: 1100px;
-$mobile-breakpoint: 430px;
+$breakpointPc: 1100px;
+$breakpointMo: 430px;
+$maxMoWidth: 393px;
 
 @mixin pc-view {
-  @media (min-width: $pc-breakpoint) {
+  @media (min-width: $breakpointPc) {
     @content;
   }
 }

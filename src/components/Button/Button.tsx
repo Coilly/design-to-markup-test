@@ -8,9 +8,10 @@ const Button = ({ as = 'button', type = 'button', ...arg }: ButtonProps) => {
   const Element = (as === 'link' ? NextLink : as) as ReactElementType;
 
   const finalClassName = clsx(
+    styles.button,
     type && styles[type],
     arg.variant && styles[`variant-${arg.variant}`],
-    arg.full && styles['full'],
+    arg.full && styles.full,
     arg.bg && styles[`bg-${arg.bg}`],
     arg.className,
   );
@@ -20,8 +21,9 @@ const Button = ({ as = 'button', type = 'button', ...arg }: ButtonProps) => {
       <NextLink
         href={arg.href}
         className={finalClassName}
-        aria-label={arg.ariaLabel}
         role={arg.role}
+        aria-expanded={arg.ariaExpanded}
+        aria-controls={arg.ariaControls}
       >
         {arg.children}
       </NextLink>
@@ -35,7 +37,8 @@ const Button = ({ as = 'button', type = 'button', ...arg }: ButtonProps) => {
       onClick={arg.onClick}
       disabled={arg.disabled}
       aria-label={arg.ariaLabel}
-      role={arg.role}
+      aria-expanded={arg.ariaExpanded}
+      aria-controls={arg.ariaControls}
     >
       {arg.children}
     </Element>

@@ -2,8 +2,10 @@ import CardSlider from '@/components/CardSlider/CardSlider';
 import Img from '@/components/Img/Img';
 import Tab from '@/components/Tab/Tab';
 import Text from '@/components/Text/Text';
+import useDeviceStore from '@/store/useDeviceStore';
 import { CardItem, TabItem } from '@/types/index';
 import clsx from 'clsx';
+import { useEffect, useRef, useState } from 'react';
 import style from './Section.module.scss';
 import SectionDefault from './SectionDefault';
 
@@ -15,7 +17,7 @@ const mainTabs: TabItem[] = [
         탭 영역 1
       </Text>
     ),
-    content: <Img src='image/img_tab_1.png' alt='' />,
+    content: <Img src='image/img_tab_1.png' alt='탭 영역 1 이미지' />,
   },
   {
     id: '1',
@@ -24,7 +26,7 @@ const mainTabs: TabItem[] = [
         탭 영역 2
       </Text>
     ),
-    content: <Img src='image/img_tab_2.png' alt='' />,
+    content: <Img src='image/img_tab_2.png' alt='탭 영역 2 이미지' />,
   },
   {
     id: '2',
@@ -33,7 +35,7 @@ const mainTabs: TabItem[] = [
         탭 영역 3
       </Text>
     ),
-    content: <Img src='image/img_tab_3.png' alt='' />,
+    content: <Img src='image/img_tab_3.png' alt='탭 영역 3 이미지' />,
   },
 ];
 
@@ -51,7 +53,7 @@ const mainCards: CardItem[] = [
       </Text>
     ),
     imgSrc: 'image/img_card.png',
-    ariaLabel: '1',
+    ariaLabel: '과제용 카드 이미지',
   },
   {
     id: '1',
@@ -66,7 +68,7 @@ const mainCards: CardItem[] = [
       </Text>
     ),
     imgSrc: 'image/img_card.png',
-    ariaLabel: '1',
+    ariaLabel: '과제용 카드 이미지',
   },
   {
     id: '2',
@@ -81,7 +83,7 @@ const mainCards: CardItem[] = [
       </Text>
     ),
     imgSrc: 'image/img_card.png',
-    ariaLabel: '2',
+    ariaLabel: '과제용 카드 이미지',
   },
   {
     id: '3',
@@ -101,11 +103,43 @@ const mainCards: CardItem[] = [
 ];
 
 const SectionMain = () => {
+  const [isClient, setIsClient] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const { isMobile } = useDeviceStore();
+
+  let checkPc = !isClient || !isMobile;
+
+  const finalImageSrc = checkPc ? 'image/img_main_ipad.png' : 'image/img_main_iphone.png';
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const container = videoContainerRef.current;
+    if (!video || !container) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      if (entry.isIntersecting) {
+        video.play();
+      }
+    });
+
+    observer.observe(container);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div>
       <SectionDefault
         tag='Syntekabio'
         title='이 페이지는 테스트 중입니다'
+        headingLevel='h1'
         subTitle={
           <Text as='p' variant='paragraph' className={style.section_subtitle}>
             면접 과제용으로 제작된 샘플 페이지입니다.
@@ -113,7 +147,7 @@ const SectionMain = () => {
         }
       >
         <div className={style.section_content}>
-          <Img src='image/img_main_ipad.png' alt='' className={style.gradient} width={907} />{' '}
+          <Img src={finalImageSrc} alt='신테카바이오 메인 비주얼 이미지' className={style.gradient} width={907} />
         </div>
       </SectionDefault>
 
@@ -127,8 +161,19 @@ const SectionMain = () => {
           </Text>
         }
       >
-        <div className={clsx(style.section_content, style.section_video)}>
-          <Img src='image/img_video_cover.png' alt='' />
+        <div ref={videoContainerRef} className={clsx(style.section_content, style.section_video)}>
+          <video
+            ref={videoRef}
+            src={`${process.env.NEXT_PUBLIC_URL || ''}/video/main.mp4`}
+            className={style.video}
+            onEnded={(e) => {
+              e.currentTarget.pause();
+            }}
+            playsInline
+            controls
+            muted
+            aria-label='신테카바이오 소개 영상'
+          />
         </div>
       </SectionDefault>
 
@@ -168,7 +213,7 @@ const SectionMain = () => {
         bg='green'
       >
         <div className={clsx(style.section_content, style.section_slider)}>
-          <CardSlider cards={mainCards} imgHeight={460} className={style.slider} />
+          <CardSlider cards={mainCards} imgHeight={checkPc ? 460 : 218} className={style.slider} />
         </div>
       </SectionDefault>
     </div>

@@ -25,12 +25,17 @@ const Tab = ({
 
   return (
     <div className={className}>
-      <div className={clsx(styles.label_wrap, labelClassName)} role='tablist'>
-        {tabs.map((tab) => (
+      <div className={clsx(styles.label_wrap, labelClassName)} role='tablist' aria-label='탭 메뉴'>
+        {tabs.map((tab, index) => (
           <Button
             key={`tab-${tab.id}`}
+            id={`tab-${tab.id}`}
             onClick={() => handleTabClick(tab.id)}
             className={clsx(tab.id === activeTabId && styles.active, variant && styles[variant])}
+            role='tab'
+            aria-selected={tab.id === activeTabId}
+            aria-controls={`tabpanel-${tab.id}`}
+            tabIndex={tab.id === activeTabId ? 0 : -1}
           >
             {tab.label}
           </Button>

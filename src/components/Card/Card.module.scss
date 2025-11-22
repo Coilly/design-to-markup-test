@@ -1,34 +1,44 @@
 @use '@/styles/abstract/colors' as colors;
+@use '@/styles/abstract/breakpoints' as bp;
 
 .card {
   overflow: hidden;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   flex-direction: column;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
   text-align: center;
   background-color: colors.$white;
   border: 1px solid colors.$white;
   border-radius: 30px;
 
+  > span {
+    flex-shrink: 0;
+  }
+
   &_text {
     display: flex;
     flex-direction: column;
     flex: 1;
+    justify-content: flex-start;
     gap: 8px;
     width: 100%;
     padding: 35px 30px;
     text-align: center;
     box-sizing: border-box;
+    min-height: 0;
   }
 
   &_label {
     color: colors.$darkGreen;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 
   &_content {
     color: colors.$paragraph;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 }
-

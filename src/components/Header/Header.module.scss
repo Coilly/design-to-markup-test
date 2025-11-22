@@ -1,8 +1,19 @@
 @use '@/styles/abstract/colors' as colors;
+@use '@/styles/abstract/breakpoints' as bp;
 
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   height: 56px;
   background-color: colors.$white;
+  transition: background-color 0.3s ease;
+
+  &_scrolled {
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
 
   &_wrap {
     display: flex;
@@ -10,24 +21,78 @@
     justify-content: space-between;
     height: 100%;
     padding: 0 24px;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.05);
   }
 }
 
 .gnb {
   display: flex;
   gap: 40px;
+  justify-content: space-between;
+  width: 100%;
 
   &_wrap {
-    display: flex;
-    gap: 27px;
+    display: none;
+
+    @include bp.pc-view {
+      display: flex;
+      gap: 27px;
+    }
+  }
+
+  &_item {
+    color: colors.$paragraph;
+    padding: 19px 18px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+    justify-content: flex-start !important;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    @include bp.pc-view {
+      padding: 0;
+      white-space: nowrap;
+      color: colors.$link;
+    }
   }
 }
 
+.hamburger {
+  &_button {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  &_icon {
+    width: 24px;
+    height: 2px;
+    background-color: colors.$darkGreen;
+    transition: all 0.3s ease;
+  }
+}
 .util {
   display: flex;
+  
+    flex-direction: column;
+    align-items: flex-start;
+      justify-content: flex-end;
+    gap: 30px;
+    width: 100%;
+
+  @include bp.pc-view {
+   flex: 1;
   align-items: center;
-  justify-content: space-between;
+   flex-direction: row;
   gap: 16px;
+  }
 
   &_lang {
     display: flex;
@@ -37,5 +102,99 @@
 
   &_login {
     width: 80px;
+
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+  }
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  max-width: 100%;
+  height: 100vh;
+  background-color: colors.$white;
+  z-index: 201;
+  transition: right 0.3s ease;
+  overflow-y: auto;
+
+  &_open {
+    right: 0;
+  }
+
+  &_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    border-bottom: 1px solid #eee;
+  }
+
+  &_close {
+    width: 24px;
+    height: 24px;
+    position: relative;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 18px;
+      height: 2px;
+      background-color: colors.$darkGreen;
+      transform-origin: center;
+    }
+
+    &::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    &::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  }
+
+  &_content {
+    padding: 8px 20px 32px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 58px);
+    box-sizing: border-box;
+     justify-content: space-between;
+
+
+  }
+}
+
+.sub {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+  &_main {
+    text-align: left;
+    padding: 19px 18px;
+    justify-content: flex-start !important;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  &_wrap {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .gnb_wrap {
+      display: flex;
+      flex-direction: column;
+     justify-content: flex-start !important;
+      width: 100%;
+      gap: 0;
+    }
   }
 }

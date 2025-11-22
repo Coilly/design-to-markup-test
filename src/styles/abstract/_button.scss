@@ -1,4 +1,4 @@
-@use './colors' as colors;
+@use './colors.scss' as colors;
 
 @mixin button-base {
   display: flex;

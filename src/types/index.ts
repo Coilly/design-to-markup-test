@@ -20,6 +20,10 @@ export interface TextProps {
   children: React.ReactNode;
 }
 
+//breakpoint
+export const $PcBreakPoint = 1100;
+export const $MoBreakPoint = 430;
+
 //Img component
 export type imgType = 'figure' | 'span';
 
@@ -57,7 +61,9 @@ export interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
   bg?: string;
   className?: string;
   ariaLabel?: string;
-  children: React.ReactNode;
+  ariaExpanded?: boolean;
+  ariaControls?: string;
+  children?: React.ReactNode;
 }
 
 //Tab component
@@ -92,6 +98,7 @@ export interface CardItem {
 export interface CardProps {
   item: CardItem;
   imgHeight?: number;
+  textHeight?: string;
 }
 
 export interface CardSliderProps {
@@ -100,6 +107,7 @@ export interface CardSliderProps {
   className: string;
 }
 
+//gnb component
 export interface GnbItem {
   id: string;
   title: string;
@@ -115,5 +123,11 @@ export interface SectionProps {
   className?: string;
   variant?: 'inner' | 'out';
   children: React.ReactNode;
-  bg?:string;
+  bg?: string;
+  headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }
+
+//Section resize component
+export type ResizeProps = {
+  children: React.ReactNode;
+};

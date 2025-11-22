@@ -1,4 +1,4 @@
-@use '@/styles/abstract/breakpoints' as bp;
+@use './breakpoints.scss' as bp;
 
 @mixin text-variant($font-size, $line-height, $font-weight, $letter-spacing, $pc-font-size: null) {
   font-size: $font-size;

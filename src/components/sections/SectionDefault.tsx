@@ -12,9 +12,10 @@ const SectionDefault = ({
   headerClassName,
   variant = 'inner',
   bg,
+  headingLevel = 'h2',
 }: SectionProps) => {
   return (
-    <section className={style[`section_${bg}`]}>
+    <section className={clsx(style.section, style[`section_${bg}`])}>
       <div className={style[`section_${variant}`]}>
         <div className={clsx(style.section_wrap, className)}>
           <div className={clsx(style.section_header, headerClassName)}>
@@ -23,7 +24,7 @@ const SectionDefault = ({
                 {tag}
               </Text>
             )}
-            <Text as='h2' variant='heading1'>
+            <Text as={headingLevel} variant='heading1'>
               {title}
             </Text>
             {subTitle}

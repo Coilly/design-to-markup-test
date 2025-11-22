@@ -13,6 +13,19 @@ const config: StorybookConfig = {
         rule: {
           test: /(?<!\.module).scss$/,
         },
+        cssLoaderOptions: {
+          url: {
+            filter: (url: string) => {
+              // 절대 경로(/fonts/...)는 webpack이 처리하지 않고 그대로 유지
+              return !url.startsWith('/');
+            },
+          },
+        },
+        sassLoaderOptions: {
+          sassOptions: {
+            includePaths: [path.resolve(__dirname, '../public')],
+          },
+        },
       },
     },
     {
@@ -37,12 +50,21 @@ const config: StorybookConfig = {
     '@storybook/addon-designs',
   ],
   webpackFinal: (config) => {
-    if (config.resolve?.alias) {
+    if (config.resolve) {
+      if (!config.resolve.alias) {
+        config.resolve.alias = {};
+      }
       config.resolve.alias['@'] = path.resolve(__dirname, '../src');
       // Mock Next.js Image component for Storybook
       config.resolve.alias['next/image'] = path.resolve(__dirname, 'next-image.mock.tsx');
       // Mock Next.js Link component for Storybook
       config.resolve.alias['next/link'] = path.resolve(__dirname, 'next-link.mock.tsx');
+      
+      // public 폴더를 resolve 경로에 추가
+      if (!config.resolve.modules) {
+        config.resolve.modules = [];
+      }
+      config.resolve.modules.push(path.resolve(__dirname, '../public'));
     }
 
     const imageRule = config.module?.rules?.find((rule) => {
@@ -83,8 +105,16 @@ const config: StorybookConfig = {
           },
         ],
       },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name][ext]',
+        },
+      },
     );
     imageRule.exclude = /\.svg$/;
+    
     return config;
   },
 

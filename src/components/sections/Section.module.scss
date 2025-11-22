@@ -2,16 +2,20 @@
 @use '@/styles/abstract/colors' as colors;
 
 .section {
-    &_green {
-        background-color: colors.$lightGreen;
-    }
+  &_green {
+    background-color: colors.$lightGreen;
+  }
   &_inner {
-    max-width: bp.$mobile-breakpoint;
+    width: 100%;
+    min-width: bp.$maxMoWidth;
     margin: 120px auto 0;
+    padding: 0 16px;
     text-align: center;
+    box-sizing: border-box;
 
     @include bp.pc-view {
-      max-width: bp.$pc-breakpoint;
+      max-width: bp.$breakpointPc;
+      padding: 0;
     }
   }
 
@@ -20,7 +24,11 @@
     align-items: center;
     flex-direction: column;
     gap: 24px;
-    margin-bottom: 100px;
+    margin-bottom: 40px;
+
+    @include bp.pc-view {
+      margin-bottom: 100px;
+    }
   }
 
   &_content {
@@ -47,21 +55,90 @@
     }
   }
 
-  &_tab {
-    &_label {
-      width: 702px;
-      padding: 0 45px;
-      margin: -20px auto 80px;
-    }
+  &_video {
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 30px;
+        padding: 0 16px;
+    box-sizing: border-box;
 
-    &_content {
-      width: 892px;
+    @include bp.pc-view {
+      padding: 0;
+      width: 100%;
+      max-width: bp.$breakpointPc;
+   
+
+      video {
+        aspect-ratio: 1.76;
+      }
     }
   }
 
+  &_tab {
+    &_label {
+      position: relative;
+      width: 100%;
+      padding: 0;
+      margin: 0 auto 40px;
+
+      &::before,
+      &::after {
+        position: absolute;
+        bottom: 0;
+        width: 16px;
+        height: 2.5px;
+        background-color: colors.$gray;
+        content: '';
+      }
+
+      &::before {
+        left: -16px;
+      }
+
+      &::after {
+        right: -16px;
+      }
+
+      @include bp.pc-view {
+        width: 702px;
+        padding: 0 45px;
+        margin: -20px auto 80px;
+
+        &::before,
+        &::after {
+          display: none;
+        }
+      }
+    }
+
+    &_content {
+      width: 100%;
+      @include bp.pc-view {
+        width: 892px;
+      }
+
+          img {
+      aspect-ratio: 1.06;
+      @include bp.pc-view {
+        aspect-ratio: 1.43;
+      }
+    }
+    }
+
+
+  }
+
   &_slider {
-    width: calc(100vw - 260px);
-    margin-left: 240px;
+   width: calc(100vw - 20px);
+    padding-left: 46px;
+    box-sizing: border-box;
+
+     @include bp.pc-view {
+         width: calc(100vw - 260px);
+        margin-left: 240px;
+        padding-left: 0;
+     }
   }
 }
 
@@ -69,20 +146,26 @@
   display: block;
 
   &_header {
-    max-width: bp.$mobile-breakpoint;
+    max-width: bp.$breakpointMo;
     margin: 120px auto 0;
-        padding-top: 180px;
+    padding-top: 180px;
     text-align: center;
 
     @include bp.pc-view {
-      max-width: bp.$pc-breakpoint;
+      max-width: bp.$breakpointPc;
     }
   }
 }
 
 .slider {
-    margin-top: 80px;
-    margin-bottom: 190px;
+  margin-top: 80px;
+  margin-bottom: 190px;
+}
+
+.video {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .gradient {
