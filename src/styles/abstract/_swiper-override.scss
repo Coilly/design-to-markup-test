@@ -1,0 +1,16 @@
+@use './colors' as colors;
+
+.swiper-horizontal > .swiper-pagination-clickable .swiper-pagination-bullet {
+  width: 7.5px;
+  height: 7.5px;
+  border: 2.5px solid colors.$darkGreen;
+  background: colors.$white;
+
+  &.swiper-pagination-bullet-active {
+    background: colors.$darkGreen;
+  }
+}
+
+.swiper-wrapper {
+    padding-bottom:80px;
+  }

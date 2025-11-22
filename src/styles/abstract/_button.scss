@@ -1,0 +1,19 @@
+@use './colors' as colors;
+
+@mixin button-base {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin button-variant($minHeight, $padding) {
+  gap: 6px;
+  min-height: $minHeight;
+  padding: $padding;
+  border-radius: 60px;
+
+  &:disabled {
+    background-color: colors.$lightGray;
+    color: colors.$white;
+  }
+}

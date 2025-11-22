@@ -1,0 +1,41 @@
+@use '@/styles/abstract/colors' as colors;
+
+.header {
+  height: 56px;
+  background-color: colors.$white;
+
+  &_wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 24px;
+  }
+}
+
+.gnb {
+  display: flex;
+  gap: 40px;
+
+  &_wrap {
+    display: flex;
+    gap: 27px;
+  }
+}
+
+.util {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  &_lang {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &_login {
+    width: 80px;
+  }
+}

@@ -1,0 +1,34 @@
+@use '@/styles/abstract/colors' as colors;
+
+.card {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  background-color: colors.$white;
+  border: 1px solid colors.$white;
+  border-radius: 30px;
+
+  &_text {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 8px;
+    width: 100%;
+    padding: 35px 30px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  &_label {
+    color: colors.$darkGreen;
+  }
+
+  &_content {
+    color: colors.$paragraph;
+  }
+}
+

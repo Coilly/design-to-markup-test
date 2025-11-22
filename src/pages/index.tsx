@@ -1,5 +1,11 @@
+import Header from '@/components/Header/Header';
+import SectionMain from '@/components/sections/SectionMain';
+
 export default function Home() {
   return (
-  <div> hello world ! </div>
+    <div>
+      <Header />
+      <SectionMain />
+    </div>
   );
 }

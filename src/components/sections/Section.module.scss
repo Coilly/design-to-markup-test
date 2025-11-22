@@ -1,0 +1,106 @@
+@use '@/styles/abstract/breakpoints' as bp;
+@use '@/styles/abstract/colors' as colors;
+
+.section {
+    &_green {
+        background-color: colors.$lightGreen;
+    }
+  &_inner {
+    max-width: bp.$mobile-breakpoint;
+    margin: 120px auto 0;
+    text-align: center;
+
+    @include bp.pc-view {
+      max-width: bp.$pc-breakpoint;
+    }
+  }
+
+  &_header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 100px;
+  }
+
+  &_content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &_subtitle {
+    color: colors.$paragraph;
+  }
+
+  &_tag {
+    border-radius: 1000px;
+    padding: 14px 22px;
+
+    background-color: colors.$lightGreen;
+  }
+
+  &_video,
+  &_tabs {
+    .section_header {
+      margin-bottom: 80px;
+    }
+  }
+
+  &_tab {
+    &_label {
+      width: 702px;
+      padding: 0 45px;
+      margin: -20px auto 80px;
+    }
+
+    &_content {
+      width: 892px;
+    }
+  }
+
+  &_slider {
+    width: calc(100vw - 260px);
+    margin-left: 240px;
+  }
+}
+
+.card {
+  display: block;
+
+  &_header {
+    max-width: bp.$mobile-breakpoint;
+    margin: 120px auto 0;
+        padding-top: 180px;
+    text-align: center;
+
+    @include bp.pc-view {
+      max-width: bp.$pc-breakpoint;
+    }
+  }
+}
+
+.slider {
+    margin-top: 80px;
+    margin-bottom: 190px;
+}
+
+.gradient {
+  position: relative;
+  &::after {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 29.53%,
+      rgba(255, 255, 255, 0.5) 55.93%,
+      #ffffff 77.25%
+    );
+    content: '';
+  }
+}
